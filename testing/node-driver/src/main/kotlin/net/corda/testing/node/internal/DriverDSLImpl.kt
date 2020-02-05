@@ -142,11 +142,7 @@ class DriverDSLImpl(
     private lateinit var _notaries: CordaFuture<List<NotaryHandle>>
     override val notaryHandles: List<NotaryHandle> get() = _notaries.getOrThrow()
 
-    override val cordappsClassLoader: ClassLoader? = if (!startNodesInProcess) {
-        createCordappsClassLoader(cordappsForAllNodes)
-    } else {
-        null
-    }
+    override val cordappsClassLoader = createCordappsClassLoader(cordappsForAllNodes)
 
     interface Waitable {
         @Throws(InterruptedException::class)
